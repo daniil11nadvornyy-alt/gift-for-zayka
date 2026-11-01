@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7f5">
+  <title>Для моей зайки 💌</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #503c48;
+      --muted: #876f7a;
+      --pink: #e98eaa;
+      --rose: #fff0f2;
+      --cream: #fffaf4;
+      --card: rgba(255, 255, 255, .86);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 12%, #ffe1e8 0, transparent 30rem),
+        radial-gradient(ellipse at 90% 80%, #f8e7ed 0, transparent 32rem),
+        var(--cream);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    button { font: inherit; }
+
+    .wrap {
+      width: min(940px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+      padding: 36px 20px;
+      text-align: center;
+    }
+
+    .hero-inner { max-width: 650px; }
+
+    .eyebrow {
+      color: #a56e82;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.7rem, 9vw, 5rem);
+      font-weight: 500;
+      line-height: 1.08;
+    }
+
+    .hero p {
+      max-width: 520px;
+      margin: 16px auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .heart {
+      display: inline-block;
+      color: var(--pink);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse { 50% { transform: scale(1.2); } }
+
+    section {
+      margin: 22px 0;
+      padding: clamp(22px, 5vw, 40px);
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 28px;
+      background: var(--card);
+      box-shadow: 0 14px 40px rgba(109, 66, 83, .07);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 5vw, 2.3rem);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .intro, .small { color: var(--muted); }
+    .intro { margin: 0 0 22px; }
+
+    .photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .photo {
+      margin: 0;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border: 1px solid #f1dce2;
+      border-radius: 20px;
+      background: #fff4f4;
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .compliments {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .compliment {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: var(--rose);
+    }
+
+    .compliment::before {
+      content: "♡";
+      margin-right: 9px;
+      color: #d87896;
+      font-size: 1.2rem;
+    }
+
+    .memory-list {
+      display: grid;
+      gap: 12px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .memory-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff8f4;
+    }
+
+    .memory-list span { font-size: 1.3rem; }
+
+    .quest { background: linear-gradient(145deg, #fff2f5, #fffaf5); }
+
+    .clue-box {
+      min-height: 112px;
+      display: grid;
+      place-items: center;
+      margin: 20px 0;
+      padding: 22px;
+      border: 1px solid #f4d5de;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .75);
+      text-align: center;
+      font-size: 1.12rem;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 999px;
+      background: #d97998;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .button:hover { transform: translateY(-2px); background: #c96586; }
+    .button:focus-visible { outline: 3px solid #75455a; outline-offset: 3px; }
+    .button:disabled { cursor: default; opacity: .8; }
+
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .choice {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #e8b8c6;
+      border-radius: 50%;
+      background: white;
+      color: #a55370;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform .18s ease, background .18s ease, color .18s ease;
+    }
+
+    .choice:hover { transform: translateY(-2px); }
+    .choice[aria-pressed="true"] { background: #d97998; color: white; }
+    .choice:focus-visible { outline: 3px solid #75455a; outline-offset: 3px; }
+
+    .final {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 18px;
+      background: white;
+      text-align: center;
+    }
+
+    .final.show { display: block; animation: appear .5s ease both; }
+    .gift-reveal {
+      display: none;
+      margin-top: 20px;
+      padding: 22px;
+      border: 1px solid #f1d4de;
+      border-radius: 20px;
+      background: white;
+      text-align: center;
+    }
+
+    .gift-reveal.show { display: block; animation: appear .5s ease both; }
+    .gift-reveal video { display: block; width: 100%; max-width: 520px; max-height: 70vh; margin: 16px auto 0; border-radius: 16px; background: #2b2026; }
+    .gift-reveal a { color: #a55370; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      padding: 28px 16px 0;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 620px) {
+      .photos, .compliments { grid-template-columns: 1fr; }
+      .hero { min-height: 300px; }
+      .choices { gap: 8px; }
+      .choice { width: 44px; height: 44px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Маленький сайт для самого дорогого человека</div>
+        <h1>Моя зайка <span class="heart" aria-hidden="true">♥</span></h1>
+        <p>Я собрал здесь немного наших воспоминаний и напоминание о том, как сильно я тебя ценю.</p>
+      </div>
+    </header>
+
+    <section aria-labelledby="photos-title">
+      <h2 id="photos-title">Наши моменты</h2>
+      <p class="intro">Три наших момента, к которым всегда приятно возвращаться.</p>
+      <div class="photos">
+        <figure class="photo"><img src="images/camp-moment.jpg" alt="Мы вместе в лагере"></figure>
+        <figure class="photo"><img src="images/camp-photo.jpg" alt="Наше фото из лагеря"></figure>
+        <figure class="photo"><img src="images/dance-together.png" alt="Мы обнимаемся на вечернем празднике"></figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="letter-title">
+      <h2 id="letter-title">За что я тебя люблю</h2>
+      <p class="intro">На самом деле — за всё. Но вот несколько вещей, которые хочется сказать отдельно:</p>
+      <div class="compliments">
+        <div class="compliment">За твою заботу и любовь.</div>
+        <div class="compliment">За твою улыбку — она всегда делает день лучше.</div>
+        <div class="compliment">За твою красоту, внутри и снаружи.</div>
+        <div class="compliment">За то, как уютно мне рядом с тобой — особенно в объятиях.</div>
+      </div>
+    </section>
+
+    <section aria-labelledby="memories-title">
+      <h2 id="memories-title">То, что хочется беречь</h2>
+      <ul class="memory-list">
+        <li><span aria-hidden="true">🏕️</span><div><strong>Наш лагерь</strong><br><span class="small">Одно из тех воспоминаний, к которым приятно возвращаться.</span></div></li>
+        <li><span aria-hidden="true">🚶</span><div><strong>Наши прогулки</strong><br><span class="small">Когда просто быть рядом — уже отличный план.</span></div></li>
+        <li><span aria-hidden="true">💬</span><div><strong>Любимые сплетни и разговоры</strong><br><span class="small">Особенно когда можно болтать обо всём на свете.</span></div></li>
+        <li><span aria-hidden="true">🫂</span><div><strong>Твои объятия</strong><br><span class="small">И то, как ты гладишь мои волосы. Мне рядом с тобой очень спокойно.</span></div></li>
+      </ul>
+    </section>
+
+    <section class="quest" aria-labelledby="quest-title">
+      <h2 id="quest-title">Маленький квест для тебя</h2>
+      <p class="intro">Ответ на загадку, которую я отправил тебе в чате, — одно из этих чисел. Выбери его, чтобы открыть подарок 💌</p>
+      <div class="clue-box" id="clue" aria-live="polite">Готова, зайка? Тогда начнём 💌</div>
+      <div class="choices" role="group" aria-label="Выбери послание от 1 до 5">
+        <button class="choice" type="button" data-choice="1" aria-label="Ответ 1">1</button>
+        <button class="choice" type="button" data-choice="2" aria-label="Ответ 2">2</button>
+        <button class="choice" type="button" data-choice="3" aria-label="Ответ 3">3</button>
+        <button class="choice" type="button" data-choice="4" aria-label="Ответ 4">4</button>
+        <button class="choice" type="button" data-choice="5" aria-label="Ответ 5">5</button>
+      </div>
+      <div class="clue-box" id="answer-feedback" aria-live="polite" hidden></div>
+      <div class="gift-reveal" id="gift-reveal" aria-live="polite">
+        <strong>Ты угадала, зайка! 🎁</strong>
+        <p>Вот мой подарок для тебя. Люблю тебя!</p>
+        <video controls playsinline preload="none" aria-label="Видео-подарок">
+          <source src="images/gift-video.mp4" type="video/mp4">
+          Твой браузер не смог открыть видео.
+        </video>
+        <p class="small">Если видео не запускается, <a href="images/gift-video.mp4" download>скачай его здесь</a>.</p>
+      </div>
+    </section>
+
+    <footer>Сделано с любовью — специально для тебя <span aria-hidden="true">♡</span></footer>
+  </main>
+
+  <script>
+    const feedback = document.getElementById("answer-feedback");
+    const gift = document.getElementById("gift-reveal");
+    const giftVideo = gift.querySelector("video");
+    const choiceButtons = document.querySelectorAll(".choice");
+
+    choiceButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const answer = Number(button.dataset.choice);
+        feedback.hidden = false;
+        if (answer === 5) {
+          feedback.textContent = "Правильно! Ты разгадала подсказку 💗";
+          gift.classList.add("show");
+          giftVideo.load();
+        } else {
+          feedback.textContent = "Не это число, зайка — попробуй ещё раз 😊";
+          giftVideo.pause();
+          gift.classList.remove("show");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
